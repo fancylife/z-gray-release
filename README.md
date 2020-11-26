@@ -1,9 +1,10 @@
 # z-gray-release.js
 
-## 使用
+## 快速开始
 ```
 const isGray = require('z-gray-release').isGray;
 isGray('white:zwork','E.zwork.1'); // true or false
+
 ```
 
 ## 企业级灰度策略
@@ -27,4 +28,8 @@ TODO
 |white:%3.%4|任何企业id%3 == 0并且员⼯id%4 == 0 就可以访问|企业及员⼯id百分⽐|
 
 
+## Test
 
+```
+npm run test;
+```
