@@ -83,8 +83,29 @@ class GrayRule {
                 return this.parseAcccount(key);
             })
         }
+        
+        let regex2 = /^([a-zA-Z0-9]+)\.%([0-9]{1,3})$/
+        if (regex2.test(dataStr)) { // 分别 aa|bb|dd
+           let tmp = regex2.exec(dataStr);
+           let eaStr = tmp[0];
+           let empIdModValue = tmp[1];
+           return [{
+            enterpriseAccountCompareRule: this.parseEnterpriseAccountCompareRule(eaStr),
+            userCompareRule: this.buildUserCompareRuleWithSingleEmpIdModValue(empIdModValue)
+           }] 
+        }
+        
         return [this.parseAcccount(dataStr)];
     }
+    buildUserCompareRuleWithSingleEmpIdModValue(empIdModValue){
+        empIdModValue = Number(empIdModValue);
+        return new UserCompareRule({
+            key: '%'+empIdModValue,
+            equals: function (userId) {
+                return userId % empIdModValue === 0;
+            }
+        })
+    },
     parseAcccount(accountStr) {
         let userIdRgex = /(.+)\./;
         let item = {}
