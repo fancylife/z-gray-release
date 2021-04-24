@@ -17,8 +17,6 @@ test("white:zwork.1-100", "E.zwork.99", true);
 test("white:zwork.1-100", "E.zwork.1", true);
 test("white:zwork.1-100", "E.zwork.101", false);
 
-// test('white:zwork.1-100','E.zwork.101', false);
-
 test("allow", "E.zwork.101", true);
 test("deny", "E.zwork.101", false);
 

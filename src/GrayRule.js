@@ -87,8 +87,8 @@ class GrayRule {
         let regex2 = /^([a-zA-Z0-9]+)\.%([0-9]{1,3})$/
         if (regex2.test(dataStr)) { // 分别 aa|bb|dd
            let tmp = regex2.exec(dataStr);
-           let eaStr = tmp[0];
-           let empIdModValue = tmp[1];
+           let eaStr = tmp[1];
+           let empIdModValue = tmp[2];
            return [{
             enterpriseAccountCompareRule: this.parseEnterpriseAccountCompareRule(eaStr),
             userCompareRule: this.buildUserCompareRuleWithSingleEmpIdModValue(empIdModValue)
@@ -102,10 +102,10 @@ class GrayRule {
         return new UserCompareRule({
             key: '%'+empIdModValue,
             equals: function (userId) {
-                return userId % empIdModValue === 0;
+                return Number(userId) % empIdModValue === 0;
             }
         })
-    },
+    }
     parseAcccount(accountStr) {
         let userIdRgex = /(.+)\./;
         let item = {}
